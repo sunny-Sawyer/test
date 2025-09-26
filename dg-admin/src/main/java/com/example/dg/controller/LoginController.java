@@ -19,7 +19,7 @@ import javax.annotation.Resource;
  * 
  * @author ruoyi
  */
-@Tag(name = "登录模块1")
+@Tag(name = "登录模块")
 @RestController
 public class LoginController
 {
