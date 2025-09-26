@@ -1,0 +1,86 @@
+# 项目相关配置
+ruoyi:
+  # 名称
+  name: RuoYi
+  # 版本
+  version: 3.9.0
+  # 版权年份
+  copyrightYear: 2025
+  # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
+  profile: D:/ruoyi/uploadPath
+  # 获取ip地址开关
+  addressEnabled: false
+  # 验证码类型 math 数字计算 char 字符验证
+  captchaType: math
+
+server:
+  port: 8864
+spring:
+  # 资源信息
+  messages:
+    # 国际化资源文件路径
+    basename: i18n/messages
+  application:
+    name: Digital-governance
+  profiles:
+    active: test
+  cloud:
+    alicloud:
+      sms:
+        host: 申请的短信host地址
+        path: 阿里云短信验证码的接口路径
+        appcode: 你的APPCODE
+  servlet:
+    multipart:
+      enabled: true # 开启文件上传支持
+      max-file-size: 30MB # 单个文件大小
+      max-request-size: 30MB # 总上传数据大小
+      location: D:/usr/local/tmp # 临时文件存储目录
+
+mybatis-plus:
+  mapperLocations: classpath:/mapper/**.xml
+  type-aliases-package: com.example.dg.pojo.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+# spring-doc-openapi项目配置
+spring-doc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+    enabled: true # 是否启用接口文档
+  group-configs:
+    - group: '默认分组'
+      paths-to-match: '/**'
+      packages-to-scan: com.example.dg.controller
+
+knife4j:
+  enable: true # 是否启用 knife4j 增强,如果只是使用 knife4j 的 UI,则可以关闭
+  setting:
+    language: zh_cn
+    enable-footer: false
+
+upload:
+  avatar-dir: /usr/local/project/museum/upload/avatar/
+
+# token配置
+token:
+  # 令牌自定义标识
+  header: Authorization
+  # 令牌密钥
+  secret: abcdefghijklmnopqrstuvwxyz
+  # 令牌有效期（默认30分钟）
+  expireTime: 30
+
+# 用户配置
+user:
+  password:
+    # 密码最大错误次数
+    maxRetryCount: 5
+    # 密码锁定时间（默认10分钟）
+    lockTime: 10
+
+

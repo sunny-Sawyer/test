@@ -1,0 +1,46 @@
+package com.example.dg.pojo.entity;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Goods implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private Long id;
+
+    //商品名称
+    private String name;
+
+    //商品分类id
+    private Long categoryId;
+
+    //商品所需积分
+    private Integer points;
+
+    //图片
+    private String image;
+
+    //描述信息
+    private String description;
+
+    //0 停售 1 起售
+    private Integer status;
+
+    //创建时间
+    private LocalDateTime createAt;
+
+    //更新时间
+    private LocalDateTime updateAt;
+
+}

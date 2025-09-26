@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.dg.mapper.GoodsMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into goods (name, category_id, price, image, description, status, create_at, update_at, create_user, update_user)
+        values
+            (#{name}, #{categoryId}, #{points}, #{image}, #{description}, #{status}, #{createAt}, #{updateAt})
+    </insert>
+
+    <select id="pageQuery" resultType="com.example.dg.pojo.vo.GoodsVO">
+        select g.*, c.name as categoryName from goods g left join category c on g.category_id = c.id
+        <where>
+            <if test="name != null and name != ''">
+                and d.name like concat('%',#{name},'%')
+            </if>
+            <if test="categoryId != null">
+                and d.category_id = #{categoryId}
+            </if>
+            <if test="status != null">
+                and d.status = #{status}
+            </if>
+        </where>
+        order by d.create_time desc
+    </select>
+
+    <delete id="deleteByIds">
+        delete from goods where id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="update">
+        update goods
+        <set>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="categoryId != null">category_id = #{categoryId},</if>
+            <if test="points != null">price = #{price},</if>
+            <if test="image != null and image != ''">image = #{image},</if>
+            <if test="description != null and description != ''">description = #{description},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="updateAt != null">update_at = #{updateAt</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="list" resultType="com.example.dg.pojo.entity.Goods" parameterType="com.example.dg.pojo.entity.Goods">
+        select * from goods
+        <where>
+            <if test="name != null">
+                and name like concat('%',#{name},'%')
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+
+    <select id="countByMap" resultType="java.lang.Integer">
+        select count(id) from goods
+        <where>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+        </where>
+    </select>
+    <select id="listByCategoryIdAndStatus" resultType="com.example.dg.pojo.vo.GoodsVO">
+        select * from goods where
+        <if test="categoryId != null">
+            category_id = #{categoryId}
+        </if>
+        and status = #{status}
+    </select>
+
+</mapper>
