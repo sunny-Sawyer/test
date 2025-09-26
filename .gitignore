@@ -6,11 +6,11 @@
 !gradle/wrapper/gradle-wrapper.jar
 
 target/
+test/
 !.mvn/wrapper/maven-wrapper.jar
 
 ######################################################################
 # IDE
-.idea
 .mvn
 .vscode
 
